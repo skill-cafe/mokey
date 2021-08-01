@@ -1,0 +1,14 @@
+#!/bin/bash
+
+ADMINPASS="Passwd-of-IPA-admin-user";
+DBPASS="Password-of-Mokey-password-for-MySQL";
+
+docker run -itd --name mokey --privileged -h mokey.tcc.local -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /tmp --tmpfs /run --tmpfs /run/lock -p 8084:8084 --add-host ipa.tcc.local:192.168.7.7 --add-host mokey.tcc.local:192.168.7.69 mokey
+
+docker exec -t mokey bash -c "echo '$ADMINPASS' > /pass.txt"
+docker exec -t mokey bash -c 'systemctl enable mariadb'
+docker exec -t mokey bash -c 'systemctl start mariadb'
+docker exec -t mokey bash -c 'mysqladmin create mokey'
+docker exec -t mokey bash -c "mysql -u root -e \"grant all on mokey.* to 'mokey'@localhost identified by '$DBPASS'\""
+docker exec -t mokey bash -c "mysql -u root mokey < /usr/share/mokey/ddl/schema.sql"
+docker exec -t mokey bash -c "/install.sh"
