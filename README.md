@@ -77,15 +77,16 @@ I've automated parts of the install process and will be improving/simplifying it
     Above will ask a number of questions.
 
 12) (While in the mokey container) Edit /etc/mokey/mokey.yaml and change the values for the following variables:
-* ***dsn*** - This should container the username, password, and database name of the MariaDB database
-* ***port*** - Set this to the port on which the service should listen.  It should be the same as the target port in the build script (e.g., 8084)
-* ***bind*** - Set this to "0.0.0.0".  This allows IPs (external to Docker) to connect to the container.
-* ***auth_key*** - This needs to be set to a 32-bit string.  To generate it, see below.
-* ***enc_key*** - This also needs to be set to a 32-bit string.  Again, see below.
-* ***ipahost*** - This should be set to the FQDN for the FreeIPA server.
-* ***keytab*** - This should be set to the full path for the keytab (e.g., "/etc/mokey/keytab/mokeyapp.keytab")
-* ***ktuser*** - This should be set to the user created in the "ipa user-add" line of the install.sh script. (e.g., mokeyapp)
-* ***develop*** - This should be set to false, unless you're testing/troubleshooting.
+    
+    - ***dsn*** - This should container the username, password, and database name of the MariaDB database
+    - ***port*** - Set this to the port on which the service should listen.  It should be the same as the target port in the build script (e.g., 8084)
+    - ***bind*** - Set this to "0.0.0.0".  This allows IPs (external to Docker) to connect to the container.
+    - ***auth_key*** - This needs to be set to a 32-bit string.  To generate it, see below.
+    - ***enc_key*** - This also needs to be set to a 32-bit string.  Again, see below.
+    - ***ipahost*** - This should be set to the FQDN for the FreeIPA server.
+    - ***keytab*** - This should be set to the full path for the keytab (e.g., "/etc/mokey/keytab/mokeyapp.keytab")
+    - ***ktuser*** - This should be set to the user created in the "ipa user-add" line of the install.sh script. (e.g., mokeyapp)
+    - ***develop*** - This should be set to false, unless you're testing/troubleshooting.
     
     Remaining values can be left as is.
 
