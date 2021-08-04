@@ -34,11 +34,12 @@ I've automated parts of the install process and will be improving/simplifying it
 3) Edit the "build" script and modify the values for ADMINPASS and DBPASS in lines 3 and 4.
 
 4) Edit "install.sh" and change the variables in the config section of the install.sh script.  This script performs the following:
-* configures the internal database
-* registers the container with the FreeIPA server
-* creates the mokeyapp account and roles on the FreeIPA server
-* modifies the mokey service to allow/disallow various features
-* enables and starts the databaase and the mokey service
+    
+    - configures the internal database
+    - registers the container with the FreeIPA server
+    - creates the mokeyapp account and roles on the FreeIPA server
+    - modifies the mokey service to allow/disallow various features
+    - enables and starts the databaase and the mokey service
 
 5) Create the Docker image by running:
     ```c
