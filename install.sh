@@ -16,24 +16,26 @@
 #    settings/features.                                            #
 ####################################################################
 
-#----------------#
-# config section #
-#----------------#
+#--------------------------------#
+# Start of Configuration Section #
+#--------------------------------#
 
-DOMAIN="example.com"
-SERVER="ipa.example.com"
-REALM="EXAMPLE.COM"
-IPA_USER="bob"
-IPA_PASS="BoBsPaSsWoRd"
-DB_PASS="DbPaSsWoRd"
+DOMAIN="tcc.local"
+SERVER="ipa.tcc.local"
+REALM="TCC.LOCAL"
+IPA_USER="tim"
+IPA_PASS="ESX!!3a3bfhgjk5"
+DB_PASS="dfif98t"
 
-# where the value for:
-# - DOMAIN is LDAP domain (lower case)
-# - SERVER is the hostname of the IPA server (lower case)
-# - REALM is the kerberos domain (UPPER CASE)
-# - IPA_USER is the account that can change other users' passwords
-# - IPA_PASS is the password for the above
-# - DB_PASS can be any password (to be used by mokey) to access the db
+# following 2 keys are generated via:
+# openssl rand -hex 32
+
+AUTH_KEY="0e7ced7fdda0758df8bde1becca6ac4fe985f4f68643fdf3369c0cd99e6ef243"
+ENC_KEY="8fa246f510b70e770ffd79c494e575d99e13c56305d04f2e738f1c538c243372"
+
+#------------------------------#
+# End of Configuration Section #
+#------------------------------#
 
 ### ********* Don't edit below this line ********* ###
 
@@ -146,14 +148,14 @@ sed -i 's/^bind: .*/bind: "0.0.0.0"/' /etc/mokey/mokey.yaml
 #   The key is created by running:  openssl rand -hex 32                 #
 #------------------------------------------------------------------------#
 
-sed -i 's/^auth_key: .*/auth_key: 0e7ced7fdda0758df8bde1becca6ac4fe985f4f68643fdf3369c0cd99e6ef243/' /etc/mokey/mokey.yaml
+sed -i "s/^auth_key: .*/auth_key: $AUTH_KEY/" /etc/mokey/mokey.yaml
 
 #--------------------------------------------------------------------#
 # Following modifies mokey's config file and sets the encryption key #
 #   Again, the key is created by running:  openssl rand -hex 32      #
 #--------------------------------------------------------------------#
 
-sed -i 's/^enc_key: .*/enc_key: 8fa246f510b70e770ffd79c494e575d99e13c56305d04f2e738f1c538c243372/' /etc/mokey/mokey.yaml
+sed -i "s/^enc_key: .*/enc_key: $ENC_KEY/" /etc/mokey/mokey.yaml
 
 #-----------------------------------------------------------------------------------#
 # Following modifies mokey's config file and tells mokey where its keytab is stored #
